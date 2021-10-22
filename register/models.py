@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.conf.urls import url
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
@@ -8,17 +9,16 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
-from rest_framework import routers
-from rest_framework import permissions
-from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from django.conf.urls import url
-from .validators import validate_CPF
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions, routers
 from rest_framework.authtoken.models import Token
 
-#from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
 from .managers import UserManager
+from .validators import validate_CPF
+
+# from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 
 
 def upload_file_customer(instance, filename):
@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     document = models.FileField(upload_to="meusarquivos", blank=False, null=True)
     address = models.CharField(max_length=90, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
-#    company_id = models.ForeignKey("Company", on_delete=models.CASCADE, null=True)
+    #    company_id = models.ForeignKey("Company", on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(_("active"), default=True)
     is_admin = models.BooleanField(
         _("admin status"),
@@ -101,9 +101,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Client(User):
     class Meta:
         proxy = True
-        verbose_name = 'Client'
-        
-        verbose_name_plural = 'Clients'
+        verbose_name = "Client"
+
+        verbose_name_plural = "Clients"
+
+
 #    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 #    def create_auth_token(sender, instance=None, created=False, **kwargs):
 #        if created:

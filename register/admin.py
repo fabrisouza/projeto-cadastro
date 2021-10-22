@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin.decorators import action
 from django.contrib.admin.options import ModelAdmin
-from django.http import request
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.http import request
 from django.utils.translation import gettext_lazy as _
 
-from .models import User, Client
+from .models import Client, User
 
 
 class UserAdmin(BaseUserAdmin):
@@ -50,12 +50,12 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ["first_name", "last_name", "cpf", "email"]
-    
+
     def has_add_permission(self, request):
         return super().has_add_permission(request)
 
     def has_change_permission(self, request, obj=None):
-       return False
+        return False
 
     def get_list_display_links(self, request, list_display):
         return [""]

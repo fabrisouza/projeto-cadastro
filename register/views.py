@@ -5,8 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import Client, User
-from .serializers import (ClientSerializer, ListSerializer,
-                          UserSerializer)
+from .serializers import ClientSerializer, ListSerializer, UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -35,6 +34,7 @@ class ClientViewSet(viewsets.ModelViewSet):
             "auth": str(request.auth),
         }
         return Response(content)
+
 
 class ListViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
