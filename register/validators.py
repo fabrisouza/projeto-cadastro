@@ -1,6 +1,5 @@
 import re
 
-
 from django.core.validators import EMPTY_VALUES
 from django.forms import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -47,12 +46,10 @@ def validate_CPF(value):
 
     orig_dv = value[-2:]
 
-    new_1dv = sum([i * int(value[idx]) for idx, \
-        i in enumerate(range(10, 1, -1))])
+    new_1dv = sum([i * int(value[idx]) for idx, i in enumerate(range(10, 1, -1))])
     new_1dv = DV_maker(new_1dv % 11)
     value = value[:-2] + str(new_1dv) + value[-1]
-    new_2dv = sum([i * int(value[idx]) for idx, \
-        i in enumerate(range(11, 1, -1))])
+    new_2dv = sum([i * int(value[idx]) for idx, i in enumerate(range(11, 1, -1))])
     new_2dv = DV_maker(new_2dv % 11)
     value = value[:-1] + str(new_2dv)
     if value[-2:] != orig_dv:

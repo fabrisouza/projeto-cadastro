@@ -20,7 +20,6 @@ from .validators import validate_CPF
 # from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
-
 def upload_file_customer(instance, filename):
     return f"{instance.name}-{filename}"
 
