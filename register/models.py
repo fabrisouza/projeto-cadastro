@@ -41,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     document = models.FileField(upload_to="meusarquivos", blank=False, null=True)
     address = models.CharField(max_length=90, blank=True, null=True)
     city = models.CharField(max_length=30, blank=True, null=True)
-    #    company_id = models.ForeignKey("Company", on_delete=models.CASCADE, null=True)
+    company_id = models.ForeignKey("User", on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(_("active"), default=True)
     is_admin = models.BooleanField(
         _("admin status"),
